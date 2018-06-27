@@ -10,7 +10,7 @@ from user_decorator import login
 
 def register(request):
     context = {'title': '用户注册'}
-    return render(request,'df_user/register.html', context)
+    return render(request, 'df_user/register.html', context)
 
 def register_handle(request):
     post = request.POST
@@ -24,12 +24,12 @@ def register_handle(request):
 
     if upwd != upwd2:
         return redirect('/user/register/')
-        print ('pwd error')
+        print('pwd error')
     s1 = hashlib.sha1()
     s1.update(upwd)
     upwd3 = s1.hexdigest()
 
-    user=UserInfo()
+    user = UserInfo()
     user.uname = uname
     user.upwd = upwd3
     user.uemail = uemail
@@ -106,17 +106,16 @@ def order(request):
     """
     此函数用户给下订单页面展示数据
     接收购物车页面GET方法发过来的购物车中物品的id，构造购物车对象供订单使用
-     """
-     uid = request.session.get('user_id')
-     user = OrderInfo.objects.filter(user=uid)
-     # 获取勾选的每一个订单对象，构造成list，作为上下文传入下单页面
-     orderlist = []
-     for order in user:
-         orderlist.append(order)
+    """
+    uid = request.session.get('user_id')
+    user = OrderInfo.objects.filter(user=uid)
+    # 获取勾选的每一个订单对象，构造成list，作为上下文传入下单页面
+    orderlist = []
+    for order in user:
+        orderlist.append(order)
 
-     context = {'title': '用户中心', 'page_name': 1, 'option': 2, 'orderlist': orderlist}
-     return render(request, 'df_user/user_center_order.html', context)
-
+    context = {'title': '用户中心', 'page_name': 1, 'option': 2, 'orderlist': orderlist}
+    return render(request, 'df_user/user_center_order.html', context)
 @login
 def Site(request):
     user = UserInfo.objects.get(id=request.session['user_id'])

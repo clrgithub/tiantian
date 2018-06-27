@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block left_list  %}
+	<div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="/user/info" {% if option == 1 %} class="active" {% endif %}>· 个人信息</a></li>
+				<li><a href="/user/order" {% if option == 2 %} class="active" {% endif %}>· 全部订单</a></li>
+				<li><a href="/user/site" {% if option == 3 %} class="active" {% endif %}>· 收货地址</a></li>
+			</ul>
+		</div>
+		{% block b %}
+
+		{% endblock b %}
+	</div>
+{% endblock left_list %}
+
